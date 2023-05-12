@@ -4,8 +4,6 @@ author: Jan Pavlík
 email: Jan.Pavlik@rmgastro.com
 discord: Jan P.#7609
 """
-
-#Const
 TEXTS = ['''
 Situated about 10 miles west of Kemmerer,
 Fossil Butte is a ruggedly impressive
@@ -35,15 +33,14 @@ garpike and stingray are also present.'''
 ]
 
 Users = {
-    'Bob': '123',
-    'Ann': 'pass123',
-    'Mike': 'password123',
-    'Liz': 'pass123'
-       }
+    'bob': '123',
+    'ann': 'pass123',
+    'mike': 'password123',
+    'liz': 'pass123'
+        }
 
-#var
 separator = "-" * 65
-PocetTitle = 0
+PocetTitle = 0 #malyma
 PocetUpper = 0
 PocetLower = 0
 PocetNum = 0
@@ -51,42 +48,46 @@ SumNum = 0
 counts = {}
 text = ''
 
-#Přihlášení uživatele
+# Přihlášení uživatele
 username = input("Jmeno:")
 password = input("Heslo:")
 
 
 # Ověření přihlášení
-if Users.get(username.capitalize()) == password:
-       print(separator, "Welcome to the app " + username, "We have 3 texts to be analyzed.", separator, sep="\n")
+if Users.get(username) == password:
+        print(separator, "Welcome to the app " + username, "We have 3 texts to be analyzed.", separator, sep="\n")
 else:
-       print(separator, "username:"+username, "password"+password, "unregistered user, terminating the program..", separator, sep="\n")
-       exit()
+        print(separator, "username:"+username, "password"+password, "unregistered user, terminating the program..", separator, sep="\n")
+        exit()
 
 text_no = input("Enter a number btw. 1 and 3 to select:")
 
 if text_no.isnumeric():
-        if int(text_no) < len(TEXTS):
-              text = TEXTS[int(text_no)]
-              print(separator)
+        if (int(text_no) <= len(TEXTS)) and (int(text_no) > 0):
+            text = TEXTS[int(text_no)-1]
+            print(separator)
         else:
-              print('The entered value was not found!')
-              exit()
+            print('The entered value was not found!')
+            exit()
 else:   print("The entered value is not a number!")
 
-#Průchod textem
+# Průchod textem
 for i in text.split():
+
     if i[0].isupper():
-        PocetTitle = PocetTitle + 1
+        PocetTitle += 1
+
     elif i.isupper():
-        PocetUpper = PocetUpper + 1
+        PocetUpper += 1
+
     elif i.islower():
-        PocetLower = PocetLower + 1
+        PocetLower += 1
+
     elif i.isnumeric():
-        PocetNum = PocetNum + 1
+        PocetNum += 1
         SumNum = SumNum + int(i)
 
-#Output
+# Output
 print('There are', len(text.split()), 'words in the selected text.')
 print('There are', PocetTitle, 'titlecase words.')
 print('There are', PocetUpper, 'upercase words.')
@@ -95,7 +96,7 @@ print('There are', PocetNum, 'numeric words.')
 print('The sum of all the numbers', SumNum)
 
 print(separator)
-print(f'LEN\t\t\tOCCURENCES\t\tNR')
+print('LEN','OCCURENCES'.rjust(17),'NR'.rjust(13))
 print(separator)
 
 # Cyklus, který spočítá jednotlivé výskyty čísel
@@ -107,8 +108,8 @@ for count in text.split():
 
     # .. pokud číslo je uložené, inkrementuj původní hodnotu
     else:
-        counts[len(count)] = counts[len(count)] + 1
+        counts[len(count)] += 1
 
-#Setřiď podle klíče a vypiš seřazené hodnoty
+# Setřiď podle klíče a vypiš seřazené hodnoty
 for key, value in sorted(counts.items()):
-    print(f'{key}\t\t\t{value* "*"}\t\t\t{value}')
+    print(str(key).ljust(10),str(value * "*").ljust(20),str(value), sep='|')

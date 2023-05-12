@@ -40,13 +40,13 @@ Users = {
         }
 
 separator = "-" * 65
-PocetTitle = 0 #malyma
-PocetUpper = 0
-PocetLower = 0
-PocetNum = 0
-SumNum = 0
+titlecase_words = 0
+uppercase_words = 0
+lowercase_words = 0
+numeric_words = 0
+sum_numbers = 0
 counts = {}
-text = ''
+text_selected = ''
 
 # Přihlášení uživatele
 username = input("Jmeno:")
@@ -60,11 +60,11 @@ else:
         print(separator, "username:"+username, "password"+password, "unregistered user, terminating the program..", separator, sep="\n")
         exit()
 
-text_no = input("Enter a number btw. 1 and 3 to select:")
+text_number = input("Enter a number btw. 1 and 3 to select:")
 
-if text_no.isnumeric():
-        if (int(text_no) <= len(TEXTS)) and (int(text_no) > 0):
-            text = TEXTS[int(text_no)-1]
+if text_number.isnumeric():
+        if (int(text_number) <= len(TEXTS)) and (int(text_number) > 0):
+            text_selected = TEXTS[int(text_number)-1]
             print(separator)
         else:
             print('The entered value was not found!')
@@ -72,35 +72,35 @@ if text_no.isnumeric():
 else:   print("The entered value is not a number!")
 
 # Průchod textem
-for i in text.split():
+for i in text_selected.split():
 
     if i[0].isupper():
-        PocetTitle += 1
+        titlecase_words += 1
 
     elif i.isupper():
-        PocetUpper += 1
+        uppercase_words += 1
 
     elif i.islower():
-        PocetLower += 1
+        lowercase_words += 1
 
     elif i.isnumeric():
-        PocetNum += 1
-        SumNum = SumNum + int(i)
+        numeric_words += 1
+        sum_numbers += int(i)
 
 # Output
-print('There are', len(text.split()), 'words in the selected text.')
-print('There are', PocetTitle, 'titlecase words.')
-print('There are', PocetUpper, 'upercase words.')
-print('There are', PocetLower, 'lowercase words.')
-print('There are', PocetNum, 'numeric words.')
-print('The sum of all the numbers', SumNum)
+print('There are', len(text_selected.split()), 'words in the selected text.')
+print('There are', titlecase_words, 'titlecase words.')
+print('There are', uppercase_words, 'uppercase words.')
+print('There are', lowercase_words, 'lowercase words.')
+print('There are', numeric_words, 'numeric words.')
+print('The sum of all the numbers', sum_numbers)
 
 print(separator)
 print('LEN','OCCURENCES'.rjust(17),'NR'.rjust(13))
 print(separator)
 
 # Cyklus, který spočítá jednotlivé výskyty čísel
-for count in text.split():
+for count in text_selected.split():
 
     # .. pokud číslo není uložené, eviduj jej jako první hodnotu
     if len(count) not in counts:

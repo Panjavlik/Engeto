@@ -96,7 +96,7 @@ print('There are', numeric_words, 'numeric words.')
 print('The sum of all the numbers', sum_numbers)
 
 print(separator)
-print('LEN','OCCURENCES'.rjust(17),'NR'.rjust(13))
+print('LEN', 'OCCURENCES'.rjust(17), 'NR'.rjust(13))
 print(separator)
 
 # Cyklus, který spočítá jednotlivé výskyty čísel
@@ -112,4 +112,4 @@ for count in text_selected.split():
 
 # Setřiď podle klíče a vypiš seřazené hodnoty
 for key, value in sorted(counts.items()):
-    print(str(key).ljust(10),str(value * "*").ljust(20),str(value), sep='|')
+    print(str(key).ljust(10), str(value * "*").ljust(20), str(value), sep='|')
